@@ -5,19 +5,35 @@ import java.util.Map;
 import university.exception.StudentAlreadyEnrolledException;
 
 public abstract class Student extends Person {
+     private int studentId;
+     private Double GPA;
+     private String department;
+
      private Map<Course, Double> enrolledCourses;
      private static final int MAX_COURSES = 5;
 
-    public Student(int id, String name, String email) {
+    public Student(int id, String name, String email, String department, Double GPA ,int studentId) {
         super(id, name, email);
+        this.studentId = studentId;
+        this.GPA = GPA;
+        this.department = department;
         this.enrolledCourses = new HashMap<>();
 }
+
+    public int getStudentId() {
+        return studentId;
+    }
+    public Double getGPA() {
+        return GPA;
+    }
+    public String getDepartment() {
+        return department;
+    }
 
     // Enroll in a course.
     public void enrollCourse(Course course , double grade){
         if (enrolledCourses.size() >= MAX_COURSES) {
-            throw new IllegalStateException("Student cannot enroll in more than " + MAX_COURSES + " courses.");
-            
+            throw new StudentAlreadyEnrolledException("Student has already enrolled in the maximum number of courses.");
         }
         if (enrolledCourses.containsKey(course)) {
 
