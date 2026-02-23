@@ -8,7 +8,6 @@ public class Course {
     private String courseName;
     private int credits;
     private int maxSudents;
-
     List<Student> enrolledStudents;
 
     public Course(int courseCode, String courseName, int credits, int maxSudents) {
