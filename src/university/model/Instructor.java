@@ -26,7 +26,15 @@ public class Instructor extends Person {
         return assignedCourses;
     }
 
-
+public void assignGrade(Student student, Course course, double grade){
+        if (assignedCourses.contains(course)) {
+            student.assignGrade(course, grade);
+        }
+        
+        else{
+            throw new IllegalArgumentException("Instructor is not assigned to this course.");
+        }
+    }
 
     @Override
     public String toString() {
