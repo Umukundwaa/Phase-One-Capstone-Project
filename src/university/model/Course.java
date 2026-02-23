@@ -1,8 +1,8 @@
 package university.model;
 
 import java.util.List;
-import java.util.HashMap;
-
+import java.util.ArrayList;
+import university.exception.CourseFullException;
 public class Course {
     private int courseCode;
     private String courseName;
