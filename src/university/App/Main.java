@@ -49,8 +49,7 @@ public class Main {
                         System.out.print("Type (UG / GRAD): ");
                         String type = scanner.nextLine();
 
-                       
-                       Student student = new Student(id, name, email, dept, type);
+                        
                         manager.registerStudent(student);
                         System.out.println("Student registered successfully.");
                         break;
@@ -70,7 +69,6 @@ public class Main {
                         int capacity = scanner.nextInt();
                         scanner.nextLine();
 
-                       Course course = new Course(code, title, credits, capacity);
                         manager.createCourse(course);
                         System.out.println("Course created successfully.");
                         break;
