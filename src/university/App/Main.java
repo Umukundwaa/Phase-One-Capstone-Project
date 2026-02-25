@@ -12,7 +12,6 @@ public class Main {
 
         UniversityManager manager = new UniversityManager();
         Scanner scanner = new Scanner(System.in);
-
         boolean running = true;
 
         while (running) {
@@ -27,7 +26,7 @@ public class Main {
             System.out.print("Choose option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // clear buffer
+            scanner.nextLine(); 
 
             try {
 
@@ -50,6 +49,7 @@ public class Main {
                         System.out.print("Type (UG / GRAD): ");
                         String type = scanner.nextLine();
 
+                       
                         manager.registerStudent(id, name, email, dept, type);
                         System.out.println("Student registered successfully.");
                         break;
@@ -67,6 +67,7 @@ public class Main {
 
                         System.out.print("Enter Max Capacity: ");
                         int capacity = scanner.nextInt();
+                        scanner.nextLine();
 
                         manager.createCourse(code, title, credits, capacity);
                         System.out.println("Course created successfully.");
@@ -78,6 +79,7 @@ public class Main {
 
                         System.out.print("Enter Course Code: ");
                         int courseCode = scanner.nextInt();
+                        scanner.nextLine();
 
                         manager.enrollStudentInCourse(studentId, courseCode);
                         System.out.println("Enrollment successful.");
@@ -86,6 +88,7 @@ public class Main {
                     case 4:
                         System.out.print("Enter Student ID: ");
                         int viewId = scanner.nextInt();
+                        scanner.nextLine();
 
                         manager.viewStudentRecord(viewId);
                         break;
@@ -100,11 +103,13 @@ public class Main {
                         break;
 
                     default:
-                        System.out.println("Invalid choice.");
+                        System.out.println("Invalid choice. Please enter 1-6.");
                 }
 
             } catch (StudentAlreadyEnrolledException | CourseFullException e) {
-                System.out.println("Error: " + e.getMessage());
+                System.out.println("Enrollment Error: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Input Error: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Unexpected error: " + e.getMessage());
             }
