@@ -2,7 +2,7 @@ package university.model;
 
 import java.util.List;
 import java.util.ArrayList;
-import university.exception.CourseFullException;
+import university.exceptions.CourseFullException;
 public class Course {
     private int courseCode;
     private String courseName;
