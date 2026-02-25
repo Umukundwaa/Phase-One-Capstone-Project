@@ -1,26 +1,30 @@
 package university.model;
 
 public class GraduateStudent extends Student {
+
     private static final double PRICE_PER_CREDIT = 800.0;
     private static final double RESEARCH_FEE = 1500.0;
 
-    public GraduateStudent( int id, String name , String email){
-        super(id, name, email);
+    // GraduateStudent constructor 
+    public GraduateStudent(int id, String name, String email, String department) {
+        super(id, name, email, department);
     }
-    
-    @Override
 
+    @Override
     public double calculateTuition() {
         return (getTotalCredits() * PRICE_PER_CREDIT) + RESEARCH_FEE;
     }
 
-   public String toString() {
+    @Override
+    public String toString() {
         return "GraduateStudent [" +
-                "id='" + getId() + '\'' +
-                ", name='" + getName() + '\'' +
-                ", email='" + getEmail() + '\'' +
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", department='" + getDepartment() + "'" +
                 ", totalCredits=" + getTotalCredits() +
-                ", tuition=" + calculateTuition() +
-                ']';
+                ", GPA=" + String.format("%.2f", calculateGPA()) +
+                ", tuition=$" + calculateTuition() +
+                "]";
     }
 }
