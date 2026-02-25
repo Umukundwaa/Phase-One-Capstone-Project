@@ -2,7 +2,7 @@ package university.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import university.exception.StudentAlreadyEnrolledException;
+import university.exceptions.StudentAlreadyEnrolledException;
 
 public abstract class Student extends Person {
      private int studentId;
