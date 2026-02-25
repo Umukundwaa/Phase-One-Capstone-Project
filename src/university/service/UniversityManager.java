@@ -16,8 +16,9 @@ public class UniversityManager {
         this.courses = new HashMap<>();
     }
 
+    
     // Register Student
-  
+
     public void registerStudent(Student student) {
 
         if (students.containsKey(student.getId())) {
@@ -27,9 +28,8 @@ public class UniversityManager {
         students.put(student.getId(), student);
     }
 
-
     // Create Course
-   
+
     public void createCourse(Course course) {
 
         if (courses.containsKey(course.getCourseCode())) {
@@ -39,7 +39,7 @@ public class UniversityManager {
         courses.put(course.getCourseCode(), course);
     }
 
-     // Enroll Student in Course
+    // Enroll Student in Course
 
     public void enrollStudentInCourse(int studentId, int courseCode) {
 
@@ -56,8 +56,8 @@ public class UniversityManager {
         student.enrollCourse(course);
     }
 
-    // assign Grades
-
+    // Assign Grade
+ 
     public void assignGrade(int studentId, int courseCode, double grade) {
 
         Student student = students.get(studentId);
@@ -71,27 +71,26 @@ public class UniversityManager {
         }
 
         student.assignGrade(course, grade);
+    }
 
-        //Calculate Average of GPA
-
+    // Calculate Average GPA 
+   
     public double calculateAverageGPA() {
 
         if (students.isEmpty()) {
             return 0.0;
         }
 
-        double total = 0;
-        int count = 0;
+        double total = 0.0;
 
         for (Student student : students.values()) {
             total += student.calculateGPA();
-            count++;
         }
 
-        return total / count;
+        return total / students.size();
     }
 
-    // Find TOP Student
+    // Find Top Student
 
     public Student findTopStudent() {
 
@@ -102,7 +101,7 @@ public class UniversityManager {
 
             double gpa = student.calculateGPA();
 
-            if (gpa > highestGPA) {
+            if (topStudent == null || gpa > highestGPA) {
                 highestGPA = gpa;
                 topStudent = student;
             }
@@ -111,7 +110,48 @@ public class UniversityManager {
         return topStudent;
     }
 
-    // getters
+    // View Student Record
+
+    public void viewStudentRecord(int studentId) {
+
+        Student student = students.get(studentId);
+
+        if (student == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        System.out.println("===== Student Record =====");
+        System.out.println("ID: " + student.getId());
+        System.out.println("Name: " + student.getName());
+        System.out.println("Email: " + student.getEmail());
+        System.out.println("Department: " + student.getDepartment());
+        System.out.println("GPA: " + student.calculateGPA());
+    }
+
+    // Generate Dean's List
+   
+    public void generateDeansList() {
+
+        System.out.println("===== Dean's List =====");
+
+        boolean found = false;
+
+        for (Student student : students.values()) {
+
+            double gpa = student.calculateGPA();
+
+            if (gpa >= 3.5) {
+                System.out.println(student.getName() + " - GPA: " + gpa);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("No students qualified for Dean's List.");
+        }
+    }
+
 
     public Map<Integer, Student> getStudents() {
         return students;
@@ -120,5 +160,4 @@ public class UniversityManager {
     public Map<Integer, Course> getCourses() {
         return courses;
     }
-}
 }
