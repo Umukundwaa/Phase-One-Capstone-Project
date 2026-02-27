@@ -1,18 +1,24 @@
 package university.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import university.exceptions.CourseFullException;
+import university.exceptions.StudentAlreadyEnrolledException;
 import university.model.*;
-import university.exceptions.*;
+import university.persistence.FileManager;
 
 public class UniversityManager {
 
     private Map<Integer, Student> students;
     private Map<Integer, Course> courses;
+    private FileManager fileManager;
 
     public UniversityManager() {
         this.students = new HashMap<>();
         this.courses = new HashMap<>();
+        this.fileManager = new FileManager();
+        loadData();
     }
 
     public void registerStudent(int id, String name, String email, String department, String type) {
@@ -28,6 +34,7 @@ public class UniversityManager {
             throw new IllegalArgumentException("Invalid type. Use 'UG' or 'GRAD'.");
         }
         students.put(id, student);
+        saveData();
     }
 
     public void createCourse(int code, String title, int credits, int capacity) {
@@ -35,6 +42,7 @@ public class UniversityManager {
             throw new IllegalArgumentException("Course with code " + code + " already exists.");
         }
         courses.put(code, new Course(code, title, credits, capacity));
+        saveData();
     }
 
     public void enrollStudentInCourse(int studentId, int courseCode)
@@ -44,6 +52,7 @@ public class UniversityManager {
         Course course = courses.get(courseCode);
         if (course == null) throw new IllegalArgumentException("Course not found.");
         student.enrollCourse(course);
+        saveData();
     }
 
     public void assignGrade(int studentId, int courseCode, double grade) {
@@ -52,6 +61,7 @@ public class UniversityManager {
         Course course = courses.get(courseCode);
         if (course == null) throw new IllegalArgumentException("Course not found.");
         student.assignGrade(course, grade);
+        saveData();
     }
 
     public void viewStudentRecord(int studentId) {
@@ -111,4 +121,26 @@ public class UniversityManager {
 
     public Map<Integer, Student> getStudents() { return students; }
     public Map<Integer, Course> getCourses() { return courses; }
+
+    private void loadData() {
+        try {
+            java.util.List<Student> loadedStudents = fileManager.loadStudents();
+            java.util.List<Course> loadedCourses = fileManager.loadCourses();
+            for (Student s : loadedStudents) students.put(s.getId(), s);
+            for (Course c : loadedCourses) courses.put(c.getCourseCode(), c);
+            fileManager.loadEnrollments(loadedStudents, loadedCourses);
+        } catch (IOException | StudentAlreadyEnrolledException | CourseFullException e) {
+            System.out.println("Notice: Could not load saved data. Starting fresh. (" + e.getMessage() + ")");
+        }
+    }
+
+    private void saveData() {
+        try {
+            fileManager.saveStudents(students.values());
+            fileManager.saveCourses(courses.values());
+            fileManager.saveEnrollments(students.values());
+        } catch (IOException e) {
+            System.out.println("Warning: Could not save data. (" + e.getMessage() + ")");
+        }
+    }
 }
