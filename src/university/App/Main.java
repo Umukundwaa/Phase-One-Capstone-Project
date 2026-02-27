@@ -1,4 +1,4 @@
-package university.app;
+package university.App;
 
 import university.service.UniversityManager;
 import university.exceptions.CourseFullException;
@@ -26,7 +26,7 @@ public class Main {
             System.out.print("Choose option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
 
             try {
 
@@ -49,9 +49,7 @@ public class Main {
                         System.out.print("Type (UG / GRAD): ");
                         String type = scanner.nextLine();
 
-                       
-                       Student student = new Student(id, name, email, dept, type);
-                        manager.registerStudent(student);
+                        manager.registerStudent(id, name, email, dept, type);
                         System.out.println("Student registered successfully.");
                         break;
 
@@ -70,8 +68,7 @@ public class Main {
                         int capacity = scanner.nextInt();
                         scanner.nextLine();
 
-                       Course course = new Course(code, title, credits, capacity);
-                        manager.createCourse(course);
+                        manager.createCourse(code, title, credits, capacity);
                         System.out.println("Course created successfully.");
                         break;
 
