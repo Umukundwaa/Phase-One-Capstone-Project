@@ -1,4 +1,4 @@
-package university.app;
+package university.App;
 
 import university.service.UniversityManager;
 import university.exceptions.CourseFullException;
