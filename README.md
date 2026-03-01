@@ -1,1 +1,0 @@
-# Java University Management System
