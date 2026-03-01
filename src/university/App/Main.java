@@ -135,13 +135,13 @@ public class Main {
         System.out.println("\n------------------------------");
         System.out.println("       STUDENT RECORD         ");
         System.out.println("------------------------------");
-        System.out.printf("  %-12s : %s%n",   "ID",         student.getId());
-        System.out.printf("  %-12s : %s%n",   "Name",       student.getName());
-        System.out.printf("  %-12s : %s%n",   "Email",      student.getEmail());
-        System.out.printf("  %-12s : %s%n",   "Department", student.getDepartment());
-        System.out.printf("  %-12s : %s%n",   "Credits",    student.getTotalCredits());
-        System.out.printf("  %-12s : %.2f%n", "GPA",        student.calculateGPA());
-        System.out.printf("  %-12s : $%.2f%n","Tuition",    student.calculateTuition());
+        System.out.printf("  %-12s : %s%n",    "ID",         student.getId());
+        System.out.printf("  %-12s : %s%n",    "Name",       student.getName());
+        System.out.printf("  %-12s : %s%n",    "Email",      student.getEmail());
+        System.out.printf("  %-12s : %s%n",    "Department", student.getDepartment());
+        System.out.printf("  %-12s : %s%n",    "Credits",    student.getTotalCredits());
+        System.out.printf("  %-12s : %.2f%n",  "GPA",        student.calculateGPA());
+        System.out.printf("  %-12s : $%.2f%n", "Tuition",    student.calculateTuition());
         System.out.println("------------------------------");
 
         // Print enrolled courses
