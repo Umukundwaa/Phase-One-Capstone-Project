@@ -1,1 +1,2 @@
+202,Frontend development,20,30
 303,WebInfrastructure,30,50
