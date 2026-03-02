@@ -31,7 +31,7 @@ public abstract class Student extends Person {
         if (enrolledCourses.containsKey(course)) {
             throw new StudentAlreadyEnrolledException("Student is already enrolled in this course: " + course.getCourseName());
         }
-        // ✅ Also add this student to the Course's roster
+        // add this student to the Course's roster
         course.addStudent(this);
         enrolledCourses.put(course, null);
     }
